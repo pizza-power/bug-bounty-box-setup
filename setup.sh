@@ -32,6 +32,7 @@ nikto \
 gobuster \
 masscan \
 ruby-full \
+ruby-railties \
 wireguard \
 nfs-common \
 hydra \
