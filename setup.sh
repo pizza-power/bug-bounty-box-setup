@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # for use with Ubuntu 20.04
 # some security tools to get started
 # use this to setup new bug bounty box
@@ -46,7 +46,11 @@ gem install evil-winrm
 snap install powershell --classic
 
 # amass
-snap install amass
+curl -s https://api.github.com/repos/OWASP/Amass/releases/latest | grep "browser_download_url.*linux_amd64.zip" | cut -d : -f 2,3 | tr -d \" | wget -i -
+unzip amass* 
+chmod +x ./amass_linux_amd64/amass 
+mv ./amass_linux_amd64/amass /usr/bin/
+
 
 # nuclei
 curl -s https://api.github.com/repos/projectdiscovery/nuclei/releases/latest | grep "browser_download_url.*linux_amd64.tar.gz" | cut -d : -f 2,3 | tr -d \" | wget -i -
@@ -77,5 +81,12 @@ tar xzf ffuf* ffuf
 chmod +x ffuf
 mv ffuf /usr/bin/
 
+# getallurls (gau)
+curl -s https://api.github.com/repos/lc/gau/releases/latest | grep "browser_download_url.*linux_amd64.tar.gz" | cut -d : -f 2,3 | tr -d \" | wget -i -
+tar xzf gau* gau 
+chmod +x gau 
+mv gau /usr/bin
+
 cd ..
+echo "Don't forget to install metasploit, setoolkit, hexeditor, burp suite, wireshark, etc"
 echo "all finished!"
