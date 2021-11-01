@@ -1,8 +1,9 @@
 #!/bin/bash
-# for use with Ubuntu 20.04
+# for use with Ubuntu 21.10
 # some security tools to get started
 # use this to setup new bug bounty box
 # use at your own risk
+# will need some manual adjustments
 
 if [ "$EUID" -ne 0 ]
     then echo "Run as root!"
@@ -136,7 +137,7 @@ ln -s /usr/bin/python3 /usr/bin/python
 cp /usr/share/doc/python3-impacket/examples/* /usr/bin
 
 # install zshrc
-wget http://45.79.163.126:9999/.zshrc 
+wget http://put ip here to download zsh:9999/.zshrc 
 
 mv .zshrc $HOME
 
