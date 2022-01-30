@@ -10,9 +10,8 @@ if [ "$EUID" -ne 0 ]
     exit
 fi
 
+add-apt-repository universe -y
 apt update && apt upgrade -y
-
-add-apt-repository universe
 
 mkdir $HOME/{downloads,tools,scripts,projects}
 
@@ -27,7 +26,6 @@ vim \
 net-tools \
 remmina \
 vlc \
-wireshark \
 libcap2-bin \
 curl \
 tree \
@@ -75,8 +73,8 @@ cat packages.txt | xargs sudo apt-get install -y
 wget https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
 
 # install go, manually update to latest version
-wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
-tar -xvf go1.17.2.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.17.6.linux-amd64.tar.gz
+tar -xvf go1.17.6.linux-amd64.tar.gz
 chown -R root:root ./go
 mv go /usr/local
 
@@ -88,7 +86,6 @@ curl -s https://api.github.com/repos/OWASP/Amass/releases/latest | grep "browser
 unzip amass* 
 chmod +x ./amass_linux_amd64/amass 
 mv ./amass_linux_amd64/amass /usr/bin/
-
 
 # nuclei
 curl -s https://api.github.com/repos/projectdiscovery/nuclei/releases/latest | grep "browser_download_url.*linux_amd64.zip" | cut -d : -f 2,3 | tr -d \" | wget -i -
@@ -131,15 +128,9 @@ wget https://github.com/byt3bl33d3r/CrackMapExec/releases/download/v5.1.7dev/cme
 unzip cme-ubuntu-latest.zip -d "$HOME/tools/*"
 pip3 install cffi==1.14.5
 
-
 # maybe not needed stuff for impacket
 ln -s /usr/bin/python3 /usr/bin/python
 cp /usr/share/doc/python3-impacket/examples/* /usr/bin
-
-# install zshrc
-wget http://put ip here to download zsh:9999/.zshrc 
-
-mv .zshrc $HOME
 
 echo "export GOPATH=$HOME/go" >> $HOME/.zshrc
 echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> $HOME/.zshrc
